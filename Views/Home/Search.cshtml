@@ -1,0 +1,119 @@
+@model EcoCiclo.Models.PesquisaResiduosViewModel
+@{
+    ViewData["Title"] = "Resultado da pesquisa";
+}
+
+<section class="content-page">
+    <p class="eyebrow">Pesquisa de resíduos</p>
+    <h1>Orientações de descarte</h1>
+    <form class="search-panel result-search" asp-controller="Home" asp-action="Search" method="get">
+        <label for="query">Qual resíduo você deseja descartar?</label>
+        <div class="search-row">
+            <input id="query" name="q" type="search" value="@Model.Termo" maxlength="100" required placeholder="Ex.: garrafa PET, pilhas, óleo..." />
+            <button type="submit">Buscar <span aria-hidden="true">→</span></button>
+        </div>
+    </form>
+
+    @if (Model.Resultados.Count == 0)
+    {
+        <div class="empty-state" role="status">
+            <span class="empty-icon" aria-hidden="true">⌕</span>
+            <h2>@Model.TituloMensagem</h2>
+            <p>@Model.Mensagem</p>
+            <a class="back-link" asp-controller="Home" asp-action="Index">Voltar ao início</a>
+        </div>
+
+        @if (Model.Resultados.Count == 0 && Model.CategoriaSelecionada is null && !Model.MostrarCatalogo)
+        {
+            <section class="similar-suggestions" aria-labelledby="similar-title">
+                <p class="eyebrow">Ajude-nos a encontrar</p>
+                <h2 id="similar-title">Esse item está em alguma destas categorias?</h2>
+                <p class="similar-intro">Selecione uma categoria para ver os materiais que temos cadastrados nela.</p>
+                <div class="results-list">
+                    @foreach (var categoria in Model.CategoriasDisponiveis)
+                    {
+                        <a class="result-card" asp-controller="Home" asp-action="Search" asp-route-q="@Model.Termo" asp-route-categoriaId="@categoria.Id">
+                            <span class="result-category">Categoria</span>
+                            <h3>@categoria.Nome</h3>
+                            <p>@categoria.Descricao</p>
+                            <span class="result-link">Ver materiais desta categoria <span aria-hidden="true">→</span></span>
+                        </a>
+                    }
+                </div>
+                <p class="catalog-choice">
+                    Não se encaixa em nenhuma categoria?
+                    <a asp-controller="Home" asp-action="Search" asp-route-q="@Model.Termo" asp-route-mostrarCatalogo="true">Ver todos os materiais cadastrados</a>.
+                </p>
+            </section>
+        }
+        else if (Model.CategoriaSelecionada is not null)
+        {
+            <section class="similar-suggestions" aria-labelledby="category-title">
+                <p class="eyebrow">Materiais cadastrados</p>
+                <h2 id="category-title">Categoria: @Model.CategoriaSelecionada.Nome</h2>
+                <p class="similar-intro">Confira se o seu item corresponde a algum destes materiais.</p>
+                @if (Model.MateriaisCategoria.Count > 0)
+                {
+                    <div class="results-list">
+                        @foreach (var residuo in Model.MateriaisCategoria)
+                        {
+                            <a class="result-card" asp-controller="Residuos" asp-action="Details" asp-route-slug="@residuo.Slug">
+                                <span class="result-category">@residuo.Categoria.Nome</span>
+                                <h3>@residuo.Nome</h3>
+                                <p>@residuo.Descricao</p>
+                                <span class="result-link">Ver orientações <span aria-hidden="true">→</span></span>
+                            </a>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p>Ainda não há materiais ativos cadastrados nesta categoria.</p>
+                }
+                <p class="catalog-choice">
+                    Não encontrou o material?
+                    <a asp-controller="Home" asp-action="Search" asp-route-q="@Model.Termo" asp-route-mostrarCatalogo="true">Ver todos os materiais cadastrados</a>.
+                </p>
+            </section>
+        }
+        else if (Model.MostrarCatalogo)
+        {
+            <section class="similar-suggestions" aria-labelledby="catalog-title">
+                <p class="eyebrow">Catálogo EcoCiclo</p>
+                <h2 id="catalog-title">Não temos registros desse material, mas temos estes materiais:</h2>
+                <p class="similar-intro">Veja se algum item cadastrado corresponde ao que você deseja descartar.</p>
+                @foreach (var grupo in Model.CatalogoCompleto.GroupBy(residuo => residuo.Categoria.Nome))
+                {
+                    <h3 class="catalog-category-title">@grupo.Key</h3>
+                    <div class="results-list">
+                        @foreach (var residuo in grupo)
+                        {
+                            <a class="result-card" asp-controller="Residuos" asp-action="Details" asp-route-slug="@residuo.Slug">
+                                <span class="result-category">@residuo.Categoria.Nome</span>
+                                <h3>@residuo.Nome</h3>
+                                <p>@residuo.Descricao</p>
+                                <span class="result-link">Ver orientações <span aria-hidden="true">→</span></span>
+                            </a>
+                        }
+                    </div>
+                }
+                <p class="catalog-choice"><a asp-controller="Home" asp-action="Search" asp-route-q="@Model.Termo">Voltar à escolha de categorias</a></p>
+            </section>
+        }
+    }
+    else
+    {
+        <p class="results-count">Encontramos @Model.Resultados.Count @(Model.Resultados.Count == 1 ? "resultado" : "resultados") para “@Model.Termo”.</p>
+        <div class="results-list">
+            @foreach (var residuo in Model.Resultados)
+            {
+                <a class="result-card" asp-controller="Residuos" asp-action="Details" asp-route-slug="@residuo.Slug">
+                    <span class="result-category">@residuo.Categoria.Nome</span>
+                    <h2>@residuo.Nome</h2>
+                    <p>@residuo.Descricao</p>
+                    <span class="result-link">Ver orientações <span aria-hidden="true">→</span></span>
+                </a>
+            }
+        </div>
+    }
+</section>

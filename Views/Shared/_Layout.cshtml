@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7faf5" />
+    <title>@ViewData["Title"] | EcoCiclo</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" asp-controller="Home" asp-action="Index" aria-label="EcoCiclo - página inicial"><span class="brand-symbol" aria-hidden="true">↻</span>Eco<span>Ciclo</span></a>
+            <nav class="main-nav" aria-label="Navegação principal">
+                <a asp-controller="Home" asp-action="Index">Início</a>
+                <a href="/#categorias">Categorias</a>
+                <a href="/#como-funciona">Como funciona</a>
+                <a href="/#sobre">Sobre</a>
+            </nav>
+            <a class="header-action" href="/#categorias">Explorar <span aria-hidden="true">↗</span></a>
+        </div>
+    </header>
+    <main role="main">
+        @RenderBody()
+    </main>
+    <footer class="site-footer">
+        <a class="brand footer-brand" asp-controller="Home" asp-action="Index"><span class="brand-symbol" aria-hidden="true">↻</span>Eco<span>Ciclo</span></a>
+        <p>Informação clara para escolhas mais conscientes.</p>
+        <small>As orientações podem variar conforme o município. Consulte fontes locais oficiais.</small>
+        <span class="footer-copy">© @DateTime.Now.Year EcoCiclo</span>
+    </footer>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

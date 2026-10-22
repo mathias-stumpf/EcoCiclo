@@ -1,0 +1,44 @@
+@model EcoCiclo.Models.Residuo
+@{
+    ViewData["Title"] = Model.Nome;
+}
+
+<article class="content-page detail-page">
+    <a class="back-link" asp-controller="Home" asp-action="Index">← Nova pesquisa</a>
+    <p class="eyebrow detail-category">@Model.Categoria.Nome</p>
+    <h1>@Model.Nome</h1>
+    <p class="detail-description">@Model.Descricao</p>
+
+    <div class="guidance-grid">
+        <section class="guidance-card">
+            <span class="guidance-number">01</span>
+            <h2>Como preparar</h2>
+            <p>@(Model.InstrucoesPreparacao ?? "Ainda não há orientação cadastrada para esta etapa.")</p>
+        </section>
+        <section class="guidance-card">
+            <span class="guidance-number">02</span>
+            <h2>Como separar e descartar</h2>
+            <p>@(Model.InstrucoesDescarte ?? "Ainda não há orientação cadastrada para esta etapa.")</p>
+        </section>
+        <section class="guidance-card">
+            <span class="guidance-number">03</span>
+            <h2>Cuidados importantes</h2>
+            <p>@(Model.Cuidados ?? "Siga as orientações de segurança do serviço de coleta local.")</p>
+        </section>
+        <section class="guidance-card caution-card">
+            <span class="guidance-number">!</span>
+            <h2>O que evitar</h2>
+            <p>@(Model.OQueNaoFazer ?? "Não descarte junto a outros resíduos sem conferir a orientação municipal.")</p>
+        </section>
+    </div>
+
+    <aside class="municipal-note">
+        <span class="note-mark" aria-hidden="true">i</span>
+        <div><h2>A coleta depende da sua cidade</h2><p>O dia, o horário e os materiais aceitos variam conforme o município. Consulte o calendário e as regras nos canais oficiais da prefeitura ou do serviço local de limpeza urbana.</p></div>
+    </aside>
+
+    @if (!string.IsNullOrWhiteSpace(Model.FonteInformacao))
+    {
+        <p class="source-note">Fonte de orientação: <a href="@Model.FonteInformacao" target="_blank" rel="noopener noreferrer">consultar fonte</a></p>
+    }
+</article>

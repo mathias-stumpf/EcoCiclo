@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Descarte consciente";
+}
+
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-content">
+        <p class="eyebrow">Pequenas escolhas, impacto positivo</p>
+        <h1 id="hero-title">Descarte melhor.<br /><span>Cuide do futuro.</span></h1>
+        <p class="hero-description">Encontre orientações para preparar e encaminhar seus resíduos de forma responsável.</p>
+
+        <form class="search-panel" asp-controller="Home" asp-action="Search" method="get">
+            <label for="query">Qual resíduo você deseja descartar?</label>
+            <div class="search-row">
+                <input id="query" name="q" type="search" maxlength="100" required placeholder="Ex.: garrafa PET, pilhas, óleo..." autocomplete="off" />
+                <button type="submit">Buscar <span aria-hidden="true">→</span></button>
+            </div>
+        </form>
+        <div class="popular-searches" aria-label="Sugestões de busca">
+            <span>Buscas comuns:</span>
+            <a href="/Home/Search?q=garrafa%20PET">Garrafa PET</a>
+            <a href="/Home/Search?q=pilhas">Pilhas</a>
+            <a href="/Home/Search?q=óleo%20de%20cozinha">Óleo de cozinha</a>
+        </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="leaf leaf-one">✦</div><div class="leaf leaf-two">✿</div>
+        <div class="recycle-mark">↻</div>
+        <div class="art-note"><span class="note-dot"></span> Um ciclo melhor começa com você</div>
+    </div>
+</section>
+
+<section class="section categories" id="categorias" aria-labelledby="categories-title">
+    <div class="section-heading">
+        <div><p class="eyebrow">Explore por tipo</p><h2 id="categories-title">Encontre o caminho certo</h2></div>
+        <a class="section-link" href="#categorias">Ver todas as categorias <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="category-grid">
+        <a class="category-card" href="#categorias"><span class="category-icon icon-paper" aria-hidden="true">▤</span><h3>Papel e papelão</h3><p>Caixas, folhas e embalagens</p></a>
+        <a class="category-card" href="#categorias"><span class="category-icon icon-plastic" aria-hidden="true">◇</span><h3>Plásticos</h3><p>Descubra como preparar cada item</p></a>
+        <a class="category-card" href="#categorias"><span class="category-icon icon-electronics" aria-hidden="true">⌁</span><h3>Eletrônicos</h3><p>Encaminhe com mais segurança</p></a>
+        <a class="category-card" href="#categorias"><span class="category-icon icon-organic" aria-hidden="true">❋</span><h3>Resíduos orgânicos</h3><p>Conheça opções para seus restos</p></a>
+    </div>
+</section>
+
+<section class="how-it-works" id="como-funciona" aria-labelledby="how-title">
+    <div class="how-intro"><p class="eyebrow">Simples assim</p><h2 id="how-title">Como funciona</h2><p>Informação clara para ajudar você a fazer escolhas mais conscientes no dia a dia.</p></div>
+    <ol class="steps">
+        <li><span class="step-number">01</span><div><h3>Pesquise</h3><p>Digite o nome do material que quer descartar.</p></div></li>
+        <li><span class="step-number">02</span><div><h3>Prepare</h3><p>Confira os cuidados e as orientações disponíveis.</p></div></li>
+        <li><span class="step-number">03</span><div><h3>Encaminhe</h3><p>Consulte pontos cadastrados e fontes locais.</p></div></li>
+    </ol>
+</section>
+
+<section class="impact" id="sobre">
+    <span class="impact-icon" aria-hidden="true">✳</span>
+    <div><p class="eyebrow">Nosso propósito</p><h2>Cada descarte consciente conta.</h2><p>Separar e encaminhar resíduos corretamente pode ajudar a reduzir impactos e preservar recursos. As regras variam por município: confira as orientações locais antes de descartar.</p></div>
+</section>

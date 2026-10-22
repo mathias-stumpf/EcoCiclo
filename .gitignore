@@ -1,0 +1,12 @@
+bin/
+obj/
+node_modules/
+.vs/
+Microsoft/
+.env
+.env.*
+!.env.example
+TestResults/
+database/*.db
+database/*.db-shm
+database/*.db-wal

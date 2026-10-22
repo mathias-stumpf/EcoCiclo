@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title><link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/" aria-label="EcoCiclo início"><span class="mark" aria-hidden="true">↻</span> EcoCiclo</a><nav aria-label="Navegação principal"><a href="/categorias">Categorias</a><a href="/pontos-de-coleta">Pontos de coleta</a><a href="/sugestoes/nova">Sugerir resíduo</a></nav></header>
+  <main>
+    <section class="hero"><p class="eyebrow">Pequenas escolhas, impacto positivo</p><h1>Descarte melhor.<br><span>Cuide do futuro.</span></h1><p>Descubra como preparar e encaminhar cada resíduo corretamente.</p>
+      <form class="search" action="/residuos/buscar" method="get"><label for="q">Qual resíduo você deseja descartar?</label><div class="search-row"><input id="q" name="q" value="<%= query %>" placeholder="Ex.: garrafa PET, pilhas, óleo..." maxlength="100" required><button type="submit">Buscar <span aria-hidden="true">→</span></button></div></form>
+      <p class="suggestions">Buscas comuns: <a href="/residuos/buscar?q=garrafa%20PET">Garrafa PET</a><a href="/residuos/buscar?q=pilhas">Pilhas</a><a href="/residuos/buscar?q=óleo%20de%20cozinha">Óleo de cozinha</a></p>
+      <% if (message) { %><div class="notice" role="status"><%= message %> <a href="/sugestoes/nova">Sugira um novo resíduo</a>.</div><% } %>
+    </section>
+    <section class="section"><div class="section-head"><div><p class="eyebrow">Explore por tipo</p><h2>Encontre o caminho certo</h2></div><a class="text-link" href="/categorias">Ver categorias →</a></div><div class="cards"><a class="card" href="/categorias/papel-e-papelao"><span class="icon">▤</span><h3>Papel e papelão</h3><p>Embalagens, folhas e caixas</p></a><a class="card" href="/categorias/plasticos"><span class="icon">◇</span><h3>Plásticos</h3><p>Conheça o preparo adequado</p></a><a class="card" href="/categorias/eletronicos"><span class="icon">⌁</span><h3>Eletrônicos</h3><p>Encaminhamento responsável</p></a><a class="card" href="/categorias/organicos"><span class="icon">❋</span><h3>Resíduos orgânicos</h3><p>Possibilidades de compostagem</p></a></div></section>
+    <section class="how"><div><p class="eyebrow">Simples assim</p><h2>Como o EcoCiclo funciona</h2></div><ol><li><b>Pesquise</b><span>Digite o material que quer descartar.</span></li><li><b>Prepare</b><span>Veja os cuidados e orientações disponíveis.</span></li><li><b>Encaminhe</b><span>Consulte pontos cadastrados ou canais oficiais.</span></li></ol></section>
+    <section class="callout"><span class="icon">✳</span><div><h2>Cada descarte consciente conta</h2><p>Separar e encaminhar resíduos de forma correta ajuda a reduzir impactos e preservar recursos. As regras podem variar conforme a cidade; confira sempre as orientações locais.</p></div></section>
+  </main>
+  <footer><a class="brand" href="/">EcoCiclo</a><p>Informação clara para escolhas mais conscientes.</p><div><a href="/sobre">Sobre o projeto</a><a href="/pontos-de-coleta">Pontos de coleta</a><a href="/sugestoes/nova">Enviar sugestão</a></div><small>Orientações e pontos dependem de fontes verificadas e podem variar por município.</small></footer>
+</body></html>
