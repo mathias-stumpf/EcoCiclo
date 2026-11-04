@@ -1,0 +1,10 @@
+bin/
+obj/
+.git/
+.vs/
+node_modules/
+database/
+*.md
+Dockerfile
+.dockerignore
+render.yaml
