@@ -4,6 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Render (e outros PaaS) informa a porta pela variável PORT.
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+
+// O SQLite não cria a pasta do arquivo; garante que "database/" exista.
+Directory.CreateDirectory(Path.Combine(builder.Environment.ContentRootPath, "database"));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<EcoCicloDbContext>(options =>
